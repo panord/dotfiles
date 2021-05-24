@@ -1,1 +1,3 @@
 setxkbmap -option caps:swapescape
+feh --recursive --bg-fill ~/.wallpaper
+~/.screenlayout/default.sh
