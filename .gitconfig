@@ -1,0 +1,33 @@
+[user]
+    name        = Patrik Lundgren
+    email       = patrik.lundgren@outlook.com
+    ; signingkey  = patrik.outlook@outlook.com
+[core]
+    editor  = nvim
+[commit]
+    ; gpgsign = true
+[alias]
+    cm     = commit -s
+    lines  = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    audit  = log -p -m --first-parent
+    glog   = log --decorate --stat --show-signature
+    tree   =  log --graph --simplify-by-decoration --pretty=format:'%d'--all
+    changes = diff --name-status -r
+    dfst    = diff --stat -r
+    st      = status -suno
+    ci      = commit -S -s
+    sh      = show --show-signature
+    br      = branch
+    co      = checkout
+    df      = diff
+    dfs     = diff --staged
+    dfh     = diff HEAD
+    lg      = log --color --oneline
+    who     = shortlog -s --
+    cp      = cherry-pick
+    mrg     = merge --no-ff
+    hist    = log --follow -p --
+    wchanged = whatchanged
+
+[pull]
+    rebase = true
