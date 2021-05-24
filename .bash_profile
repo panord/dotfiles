@@ -23,7 +23,6 @@ export PS1='\[\033[1;32m\]\u@\h\[\033[0m\]:\[\033[1;34m\]\w\[\033[35m\]$(__netns
 
 # set vim commands in gnome shell
 set -o vi
-setxkbmap -option caps:swapescape
 
 # My script path
 export PATH="$HOME/bin:$PATH"
