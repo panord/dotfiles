@@ -1,4 +1,18 @@
-__netns ()
+psdir()
+{
+	echo "\e[34m\w\e[0m"
+}
+
+psusrhost()
+{
+	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -n "$SSH_CONNECTION" ]; then
+		echo -e "\e[31m\u@\h:\e[0m"
+	else
+		echo -e "\e[32m\u@\h:\e[0m"
+	fi;
+}
+
+psnetns ()
 {
 	netns=`ip netns identify $$`
 	if [ -n "$netns" ]; then
@@ -6,7 +20,7 @@ __netns ()
 	fi
 }
 
-__branch_name ()
+psbranch()
 {
 	branch=`git branch 2>/dev/null |grep \* |sed 's/\* \(.\+\)/\1/'`
 	if [ -n "$branch" ]; then
@@ -19,7 +33,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-export PS1='\[\033[1;32m\]\u@\h\[\033[0m\]:\[\033[1;34m\]\w\[\033[35m\]$(__netns)$(__branch_name)\[\033[0m\]\$ '
+export PS1="$(psusrhost)$(psdir)$(psnetns)$(psbranch)\[$(tput sgr0)\]$ "
 
 # set vim commands in gnome shell
 set -o vi
