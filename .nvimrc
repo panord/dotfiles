@@ -1,7 +1,7 @@
 "*****************************************************************************
 "" Vim-PLug core
 "*****************************************************************************
-let vimplug_exists=expand('~/.nvim/autoload/plug.vim')
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
   if !executable("curl")
@@ -16,7 +16,7 @@ if !filereadable(vimplug_exists)
   autocmd VimEnter * PlugInstall
 endif
 
-call plug#begin(expand('~/.nvim/plugged'),)
+call plug#begin(expand('~/.config/nvim/plugged'),)
 " Plugins "
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
