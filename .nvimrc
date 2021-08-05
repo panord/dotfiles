@@ -69,6 +69,8 @@ map <S-T>		:tabe <CR>
 map <S-Tab>		:tabprevious <CR>
 map <Tab>		:tabnext <CR>
 
+nnoremap gm m
+
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
 vmap > >gv
@@ -82,6 +84,9 @@ nnoremap <Leader>t8 :setlocal tabstop=8 shiftwidth=8 noexpandtab <CR>
 command! FixWhitespace :%s/\s\+$//e
 command! FWS FixWhitespace
 command! Hex :%!xxd
+command! Spell :setlocal spell spelllang=en_us
+command! NoSpell :setlocal nospell
+
 
 au FileType html 		setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType cs			setlocal tabstop=3 shiftwidth=3 expandtab
