@@ -20,6 +20,8 @@ psnetns ()
 	fi
 }
 
+source "/usr/share/git/completion/git-prompt.sh"
+
 psbranch()
 {
 	echo -e "$(__git_ps1 "[%s]")"
