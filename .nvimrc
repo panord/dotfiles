@@ -21,7 +21,6 @@ call plug#begin(expand('~/.config/nvim/plugged'),)
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'svermeulen/vim-easyclip'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim'
 
