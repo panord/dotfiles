@@ -75,25 +75,11 @@ vmap < <gv
 vmap > >gv
 nnoremap <leader>e  :GFiles <CR>
 nnoremap <leader>g  :Files <CR>
-nnoremap <Leader>t3 :setlocal tabstop=3 shiftwidth=3 expandtab <CR>
-nnoremap <Leader>t4 :setlocal tabstop=4 shiftwidth=4 expandtab <CR>
-nnoremap <Leader>t8 :setlocal tabstop=8 shiftwidth=8 noexpandtab <CR>
 
 " Commands
 command! FixWhitespace :%s/\s\+$//e
 command! FWS FixWhitespace
 command! Hex :%!xxd
-command! Spell :setlocal spell spelllang=en_us
-command! NoSpell :setlocal nospell
-
-
-au FileType html 		setlocal tabstop=2 shiftwidth=2 expandtab
-au FileType cs			setlocal tabstop=3 shiftwidth=3 expandtab
-au FileType lua			setlocal tabstop=3 shiftwidth=3 expandtab
-au FileType c 			setlocal tabstop=8 shiftwidth=8 noexpandtab
-au FileType cpp 		setlocal tabstop=8 shiftwidth=8 noexpandtab
-au BufRead,BufNewFile *.md 	setlocal textwidth=80
-au BufRead,BufNewFile *.tex 	setlocal textwidth=80
 
 syntax on
 colorscheme onedark
