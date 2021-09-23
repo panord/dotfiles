@@ -20,7 +20,7 @@ psnetns ()
 	fi
 }
 
-if [ -t "/usr/share/git/completion/git-prompt.sh" ]; then
+if [ -f "/usr/share/git/completion/git-prompt.sh" ]; then
 	source "/usr/share/git/completion/git-prompt.sh"
 fi
 
