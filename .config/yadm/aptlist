@@ -9,3 +9,4 @@ tftpd-hpa
 curl
 tmux
 feh
+docker
