@@ -22,3 +22,5 @@ echo "Setting up permission, these will require restart to take effect"
 sudo usermod -aG docker patlu
 sudo usermod -aG dialout patlu
 sudo usermod -aG wireshark patlu
+
+sudo ln -s $HOME/.config/yadm/i3-konsole /etc/profile.d/i3-konsole
