@@ -1,2 +1,5 @@
 echo "Bootstrapping yadm"
 echo "Bootstrapping yadm finished"
+
+mkdir $HOME/.wallpaper
+wget -O $HOME/.wallpaper/wallpaper.jpg https://512pixels.net/downloads/macos-wallpapers-6k/10-10-6k.jpg
