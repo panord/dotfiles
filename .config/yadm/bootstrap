@@ -8,4 +8,11 @@ if ! [ -d $HOME/.wallpaper ]; then
 	wget -O $HOME/.wallpaper/wallpaper.jpg https://512pixels.net/downloads/macos-wallpapers-6k/10-10-6k.jpg
 fi
 
+# Detect OS version and install corresponding packages
+grep -q "ID_LIKE=debian" /etc/os-release
+if [[ $? -eq 0 ]]; then
+	echo "Installing Debian packages..."
+	sudo apt install $(cat $HOME/.config/yadm/aptlist)
+fi
+
 source $HOME/.xprofile
