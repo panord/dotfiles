@@ -1,0 +1,10 @@
+build-essential
+i3
+yadm
+silversearcher-ag
+neovim
+conserver-server
+dnsmasq
+tftpd-hpa
+curl
+tmux
