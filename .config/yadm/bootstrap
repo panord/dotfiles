@@ -16,3 +16,9 @@ if [[ $? -eq 0 ]]; then
 fi
 
 source $HOME/.xprofile
+
+echo "Setting up permission, these will require restart to take effect"
+# Set some common usergroups
+sudo usermod -aG docker patlu
+sudo usermod -aG dialout patlu
+sudo usermod -aG wireshark patlu
