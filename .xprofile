@@ -1,2 +1,2 @@
 setxkbmap -option caps:swapescape
-feh --recursive --bg-fill ~/.wallpaper
+$HOME/.fehbg
