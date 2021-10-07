@@ -12,6 +12,7 @@ fi
 grep -q "ID_LIKE=debian" /etc/os-release
 if [[ $? -eq 0 ]]; then
 	echo "Installing Debian packages..."
+	sudo apt update
 	sudo apt install $(cat $HOME/.config/yadm/aptlist)
 fi
 

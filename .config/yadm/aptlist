@@ -9,9 +9,10 @@ tftpd-hpa
 curl
 tmux
 feh
-docker
+docker.io
 wireshark
 konsole
 flameshot
 bridge-utils
 traceroute
+cmake
