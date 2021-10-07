@@ -12,3 +12,6 @@ feh
 docker
 wireshark
 konsole
+flameshot
+bridge-utils
+traceroute
