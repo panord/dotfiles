@@ -16,3 +16,5 @@ flameshot
 bridge-utils
 traceroute
 cmake
+exuberant-ctags
+gawk
