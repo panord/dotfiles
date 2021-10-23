@@ -70,6 +70,11 @@ map <Tab>		:tabnext <CR>
 
 nnoremap gm m
 
+"" Set default tab policy
+set noexpandtab
+set tabstop=8
+set shiftwidth=8
+
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
 vmap > >gv
