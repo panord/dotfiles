@@ -56,6 +56,8 @@ if [ $(yorn "Installing packaged software (apt/pacman etc)") ]; then
 		echo "Installing Debian packages..."
 		apt update
 		apt install $(cat $HOME/.config/yadm/aptlist)
+	else
+		echo "Unsupported OS, skipping"
 	fi
 fi
 
