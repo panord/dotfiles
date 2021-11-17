@@ -1,28 +1,81 @@
+#!/bin/bash
+
+yorn()
+{
+	while true; do
+		read -p "$* [y/N]: " yn
+		case $yn in
+			[Yy]*) return 0;;
+			[Nn]*) return 1;;
+			*) return 0;;
+		esac
+	done
+}
+
+download()
+{
+	curl --proto '=https' --tlsv1.2 -sSf $1
+}
+
+web_install()
+{
+	name=$1
+	url=$2
+	args=$3
+
+	script=$(download "$url")
+	cand=$(echo "$script" | sha256sum)
+	target=$(cat ${name}.sha256)
+	if [ "${cand}" != "${target}" ]; then
+		echo "INVALID SHA256, SKIPPING ${name}"
+		echo -e "\tGot '${cand}'"
+		echo -e "\tExpected '${target}'"
+	fi
+
+	sh -c "${script} $3"
+	if [ $? ]; then
+		echo "Failed installing ${name}"
+	fi
+}
+
+if [ "$EUID" -ne 0 ]; then
+	echo "Bootstrap requires root"
+	exit 1
+fi
+
 echo "Bootstrapping yadm"
-echo "Bootstrapping yadm finished"
-
-source $HOME/.bash_profile
-
 if ! [ -d $HOME/.wallpaper ]; then
 	mkdir $HOME/.wallpaper
 	wget -O $HOME/.wallpaper/wallpaper.jpg https://512pixels.net/downloads/macos-wallpapers-6k/10-10-6k.jpg
 fi
 
-# Detect OS version and install corresponding packages
-grep -q "ID_LIKE=debian" /etc/os-release
-if [[ $? -eq 0 ]]; then
-	echo "Installing Debian packages..."
-	sudo apt update
-	sudo apt install $(cat $HOME/.config/yadm/aptlist)
+if [ $(yorn "Installing packaged software (apt/pacman etc)") ]; then
+	# Detect OS version and install corresponding packages
+	grep -q "ID_LIKE=debian" /etc/os-release
+	if [[ $? -eq 0 ]]; then
+		echo "Installing Debian packages..."
+		apt update
+		apt install $(cat $HOME/.config/yadm/aptlist)
+	fi
 fi
 
-source $HOME/.xprofile
 
-echo "Setting up permission, these will require restart to take effect"
-# Set some common usergroups
-sudo usermod -aG docker patlu
-sudo usermod -aG dialout patlu
-sudo usermod -aG wireshark patlu
-sudo usermod -aG vboxsf patlu
+if [ $(yorn "Installing non-packaged software") ]; then
+	web_install rust "https://sh.rustup.rs" -y
+	web_install nim  "https://nim-lang.org/choosenim/init.sh"
+fi
 
-sudo ln -s $HOME/.config/yadm/i3-konsole.sh /etc/profile.d/i3-konsole.sh
+# FIXME: Guessing the users name during sudo is apparently not
+# so straight forward. The internet claims this isn't portable.
+usr=${SUDO_USER}
+if [ $(yorn "Configure user '${usr}' for common user groups") ]; then
+	echo "Setting up user groups, these will require restart to take effect"
+	for g in docker dialout wireshark vboxsf; do
+		echo "Adding ${usr} to ${g}"
+		groupadd "$g" 2>/dev/null
+		usermod -aG "$g" ${usr}
+	done
+fi
+
+ln -sf $HOME/.config/yadm/i3-konsole.sh /etc/profile.d/i3-konsole.sh
+echo "Bootstrapping yadm finished"
