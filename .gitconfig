@@ -28,6 +28,8 @@
     mrg     = merge --no-ff
     hist    = log --follow -p --
     wchanged = whatchanged
+[diff]
+    tool = vimdiff
 
 [pull]
     rebase = true
