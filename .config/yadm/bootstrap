@@ -25,7 +25,7 @@ web_install()
 
 	script=$(download "$url")
 	cand=$(echo "$script" | sha256sum)
-	target=$(cat ${name}.sha256)
+	target=$(cat $(dirname $0)/${name}.sha256)
 	if [ "${cand}" != "${target}" ]; then
 		echo "INVALID SHA256, SKIPPING ${name}"
 		echo -e "\tGot '${cand}'"
@@ -36,8 +36,7 @@ web_install()
 		return 0;
 	fi
 
-	sh -c "${script} $3"
-	if [ $? ]; then
+	if ! sh -c "${script} $3"; then
 		echo "Failed installing ${name}"
 		return 1;
 	fi
