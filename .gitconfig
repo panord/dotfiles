@@ -3,9 +3,20 @@
     email       = patrik.lundgren@outlook.com
     ; signingkey  = patrik.outlook@outlook.com
 [core]
-    editor  = nvim
-[commit]
-    ; gpgsign = true
+    editor = nvim
+
+[diff]
+    tool = vimdiff
+
+[merge]
+    tool = vimdiff
+
+[pull]
+    rebase = true
+
+[init]
+    defaultBranch = main
+
 [alias]
     cm     = commit -s
     lines  = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -28,10 +39,3 @@
     mrg     = merge --no-ff
     hist    = log --follow -p --
     wchanged = whatchanged
-[diff]
-    tool = vimdiff
-
-[pull]
-    rebase = true
-[init]
-	defaultBranch = main
