@@ -45,46 +45,38 @@ web_install()
 	return 0;
 }
 
-if [ "$EUID" -ne 0 ]; then
-	echo "Bootstrap requires root"
-	exit 1
-fi
-
 echo "Bootstrapping yadm"
 if ! [ -d $HOME/.wallpaper ]; then
 	mkdir $HOME/.wallpaper
 	wget -O $HOME/.wallpaper/wallpaper.jpg https://512pixels.net/downloads/macos-wallpapers-6k/10-10-6k.jpg
 fi
 
-if [ $(yorn "Installing packaged software (apt/pacman etc)") ]; then
+if yorn "Installing packaged software (apt/pacman etc)"; then
 	# Detect OS version and install corresponding packages
 	grep -q "ID_LIKE=debian" /etc/os-release
 	if [[ $? -eq 0 ]]; then
 		echo "Installing Debian packages..."
-		apt update
-		apt install $(cat $HOME/.config/yadm/aptlist)
+		sudo apt update
+		sudo apt upgrade
+		sudo apt install $(cat $HOME/.config/yadm/aptlist)
 	else
 		echo "Unsupported OS, skipping"
 	fi
 fi
 
-
-if [ $(yorn "Installing non-packaged software") ]; then
+if yorn "Installing non-packaged software"; then
 	web_install rust "https://sh.rustup.rs" -y
 	web_install nim  "https://nim-lang.org/choosenim/init.sh"
 fi
 
-# FIXME: Guessing the users name during sudo is apparently not
-# so straight forward. The internet claims this isn't portable.
-usr=${SUDO_USER}
-if [ $(yorn "Configure user '${usr}' for common user groups") ]; then
+if yorn "Configure user '${USER}' for common user groups"; then
 	echo "Setting up user groups, these will require restart to take effect"
 	for g in docker dialout wireshark vboxsf; do
-		echo "Adding ${usr} to ${g}"
-		groupadd "$g" 2>/dev/null
-		usermod -aG "$g" ${usr}
+		echo "Adding ${USER} to ${g}"
+		sudo groupadd "$g" 2>/dev/null
+		sudo usermod -aG "$g" ${USER}
 	done
 fi
 
-ln -sf $HOME/.config/yadm/i3-konsole.sh /etc/profile.d/i3-konsole.sh
+sudo ln -sf $HOME/.config/yadm/i3-konsole.sh /etc/profile.d/i3-konsole.sh
 echo "Bootstrapping yadm finished"
