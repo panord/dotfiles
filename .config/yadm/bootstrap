@@ -32,10 +32,17 @@ web_install()
 		echo -e "\tExpected '${target}'"
 	fi
 
+	if ! yorn "Install ${name}?"; then
+		return 0;
+	fi
+
 	sh -c "${script} $3"
 	if [ $? ]; then
 		echo "Failed installing ${name}"
+		return 1;
 	fi
+
+	return 0;
 }
 
 if [ "$EUID" -ne 0 ]; then
