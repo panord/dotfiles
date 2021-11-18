@@ -1,4 +1,5 @@
 build-essential
+curl
 i3
 yadm
 silversearcher-ag
