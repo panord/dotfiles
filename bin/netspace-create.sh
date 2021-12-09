@@ -26,11 +26,6 @@ if [ $EUID != 0 ]; then
 fi
 
 USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
-CTL="$USER_HOME/bin/netspace-ctl.sh"
-if [ ! -f "$CTL" ]; then
-	echo "Missing $CTL start/stop script"
-fi
-
 if ! ip netns add $ns ; then
 	echo "Failed to create $ns"
 	exit 1
@@ -40,6 +35,6 @@ ip link set dev $dev netns $ns
 ip netns exec $ns ip link set lo up
 ip netns exec $ns ip link set dev $dev up
 ip netns exec $ns ip addr add dev $dev $addr
+ip netns exec $ns ip route add default dev $dev
 
-echo "Running $CTL"
-ip netns exec $ns runuser -u $SUDO_USER $CTL start
+$USER_HOME/bin/netspace-ctl.sh start $ns

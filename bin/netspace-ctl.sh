@@ -1,13 +1,20 @@
 #!/bin/bash
 cmd=$1
+ns=$2
+USER_HOME=$(getent passwd $SUDO_USER | cut -d: -f6)
 
 usage()
 {
 	echo "usage: $(basename $0) start|stop|enter [namespace]"
 }
 
-if [ -z "$cmd" ]; then
+if [ -z "$cmd" ] || [ -z "$ns" ]; then
 	usage
+	exit 1
+fi
+
+if [ $EUID != 0 ]; then
+	echo "Netspace requires elevated privileges"
 	exit 1
 fi
 
@@ -21,23 +28,6 @@ if [ "$cmd" != "start" ] && [ "$cmd" != "stop" ]; then
 	exit 1
 fi
 
-# Shamelessy ripped from rc scripts
-for i in $(ls -r $HOME/.config/netspace/plugin/*); do
-	# Ignore dangling symlinks (if any).
-	[ ! -f "$i" ] && continue
+export START="sudo ip netns exec $ns"
 
-	case "$i" in
-		*.sh)
-		# Source shell script for speed.
-		(
-			trap - INT QUIT TSTP
-			set start
-			. $i
-		)
-		;;
-	*)
-		# No sh extension, so fork subprocess.
-		$i start
-		;;
-	esac
-done
+$USER_HOME/.config/netspace/init.sh
