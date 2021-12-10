@@ -39,6 +39,7 @@ call plug#end()
 set colorcolumn=80
 set termguicolors
 set clipboard=unnamed
+set nu
 let g:rustfmt_autosave		= 1
 let g:rust_recommended_style 	= 1
 let g:rust_fold 		= 1
