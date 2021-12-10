@@ -52,18 +52,17 @@ let Grep_Default_Options = '-IR'
 
 "" Map leader to ,
 let mapleader=','
-map <leader>e 		:e <C-R>=expand("%:p:h") . "/" <CR>
 map <leader>q 		:q <CR>
-map <leader>t 		:tabe <C-R>=expand("%:p:h") . "/" <CR>
 map <leader>v 		:vsp <CR>
-map <leader>s 		:split <C-R>=expand("%:p:h") . "/" <CR>
+map <leader>s 		:sp <CR>
 map <leader><space> 	:noh <CR>
 map <leader>n		:set nu! <CR>
 map <leader>r		:set relativenumber! <CR>
 map <leader>b		:Buffers <CR>
-map <leader>f		:Grep <CR>
-map <C-\> 		:tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-map <A-]> 		:vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+map <leader>f		:Grep <cword> <CR>
+map <A-u>		:Grep <cword> * <CR>
+map <A-t> 		:tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-g>		:exec("tag ".expand("<cword>"))<CR>
 map <S-T>		:tabe <CR>
 map <S-Tab>		:tabprevious <CR>
 map <Tab>		:tabnext <CR>
