@@ -23,11 +23,23 @@ if [ "$cmd" == "enter" ]; then
 	exit 0
 fi
 
-if [ "$cmd" != "start" ] && [ "$cmd" != "stop" ]; then
+if [ "$cmd" == "start" ]; then
+	export START="sudo ip netns exec $ns"
+	$USER_HOME/.config/netspace/init.sh
+	exit 0
+elif [ "$cmd" == "stop" ] ; then
+	for p in $(sudo ip netns pids $ns); do
+		echo "Stopping $p"
+		kill -SIGKILL $p
+	done
+	exit 0
+elif [ "$cmd" == "ps" ] ; then
+	for p in $(sudo ip netns pids $ns); do
+		ps aux | grep $p | head -n 1
+	done
+else
 	echo "Unrecognized command $cmd"
 	exit 1
 fi
 
-export START="sudo ip netns exec $ns"
 
-$USER_HOME/.config/netspace/init.sh
