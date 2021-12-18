@@ -1,7 +1,6 @@
 [user]
     name        = Patrik Lundgren
-    email       = patrik.lundgren@outlook.com
-    ; signingkey  = patrik.outlook@outlook.com
+    email       = patrik.lundgren.95@gmail.com
 [core]
     editor = nvim
 
