@@ -5,11 +5,18 @@ usage()
 	echo "usage: $0 src user@ipaddress command"
 }
 
+if [ -z "$1" ] || [ -z "$2" ]; then
+	usage
+	exit 1
+fi
+
+
 src=$(readlink -f $1)
 remote=$2
 shift; shift
 cmd="$@"
-if [ -z "$src" ] || [ -z "$remote" ] || [ -z "$cmd" ]; then
+
+if [ -z "$cmd" ]; then
 	usage
 	exit 1
 fi
