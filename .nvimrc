@@ -28,6 +28,7 @@ Plug 'aliou/bats.vim'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'https://github.com/AndrewRadev/linediff.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
 Plug 'rust-lang/rust.vim'
@@ -55,12 +56,12 @@ let Grep_Default_Options = '-IR'
 let mapleader=','
 map <leader>q 		:q <CR>
 map <leader>v 		:vsp <CR>
-map <leader>s 		:sp <CR>
+map <leader>s 		:Rg <CR>
 map <leader><space> 	:noh <CR>
 map <leader>n		:set nu! <CR>
 map <leader>r		:set relativenumber! <CR>
 map <leader>b		:Buffers <CR>
-map <leader>f		:Grep <cword> <CR>
+map <leader>f		:exec("Rg ".expand("<cword>"))<CR>
 map <A-u>		:Grep <cword> * <CR>
 map <A-t> 		:tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-g>		:exec("tag ".expand("<cword>"))<CR>
@@ -84,6 +85,8 @@ nnoremap <leader>g  :Files <CR>
 " Commands
 command! FixWhitespace :%s/\s\+$//e
 command! FWS FixWhitespace
+command! Unix set ff=unix
+command! GoTo :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 command! Hex :%!xxd
 
 syntax on
