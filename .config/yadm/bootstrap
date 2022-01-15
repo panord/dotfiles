@@ -85,5 +85,10 @@ if yorn "Configure user '${USER}' for common user groups"; then
 fi
 
 sudo ln -sf $HOME/.config/yadm/i3-konsole.sh /etc/profile.d/i3-konsole.sh
+
+if yorn "Swap caps with escape?"; then
+	sudo ln -sf $HOME/.config/yadm/swap-caps-esc.sh /etc/profile.d/swap-caps-esc.sh
+fi
+
 sudo ln -sf /usr/bin/nvim /usr/bin/vi
 echo "Bootstrapping yadm finished"
