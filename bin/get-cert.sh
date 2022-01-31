@@ -1,5 +1,3 @@
-target_cert=$(curl-config --ca)
-
 yorn()
 {
 	while true; do
@@ -24,6 +22,12 @@ port=$2
 if [ -z "$hostname" ] || [ -z "$port" ]; then
 	usage
 	exit 1
+fi
+
+if [ -z "$3" ]; then
+	target_cert=$(curl-config --ca)
+else
+	target_cert=$3
 fi
 
 if [ -z "$target_cert" ]; then
