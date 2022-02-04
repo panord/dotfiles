@@ -1,0 +1,14 @@
+#!/bin/sh
+
+usage()
+{
+	echo "$0 FILE"
+}
+
+
+if [ -z "$1" ]; then
+	usage
+	exit 0
+fi
+
+objdump -p $1 | grep NEEDED | awk '{print $2}'
