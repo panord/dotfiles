@@ -1,31 +1,44 @@
-#!/bin/sh
+#!/bin/bash
 
 usage()
 {
-	echo "usage: $0 src user@ipaddress command"
+	echo "usage: $0 src out dest user@ipaddress command"
 }
 
-if [ -z "$1" ] || [ -z "$2" ]; then
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
 	usage
 	exit 1
 fi
 
 
 src=$(readlink -f $1)
-remote=$2
-shift; shift
-cmd="$@"
+out=$2
+dest=$3
+remote=$4
+shift; shift; shift; shift;
 
+cmd="$@"
 if [ -z "$cmd" ]; then
 	usage
 	exit 1
 fi
 
-dest="~/.remote/$(basename $src)"
+builddir="~/.remote/"
+rsrc=${builddir}/$(basename $src)
+rbuilddir="${remote}:${builddir}"
 
-echo "Copying files to $remote:$dest"
-ssh ${remote} "mkdir -p ${dest}"
-rsync --delete -a -t --info=progress2 --include='$(git ls-files)' ${src} "${remote}:$(dirname ${dest})"
+echo "Remote build of ${src} on ${remote}"
+echo -e "\tBuild dir ${builddir}"
+echo -e "\tOutput    ${dest}"
+echo -e "\tCommand   ${cmd}"
 
-echo "Running command ${dest}$ $cmd"
-ssh ${remote} "cd $dest ; $cmd"
+echo "Copying files to ${rbuilddir}"
+ssh ${remote} "mkdir -p ${builddir}"
+
+rsync --delete -a -t --info=progress2 --include='$(git ls-files)' ${src} "${rbuilddir}"
+
+echo "Running command ${rsrc}$ $cmd"
+ssh ${remote} "cd ${rsrc} ; $cmd"
+
+echo "Copying output from ${rbuilddir}/$(basename $src)/$out to ${dest}"
+rsync --delete -a -t --info=progress2 ${rbuilddir}/$(basename $src)/$out ${dest}
