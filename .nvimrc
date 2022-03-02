@@ -52,6 +52,13 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 let Grep_Default_Options = '-IR'
 
+"" Defaults qfenter
+"" let g:qfenter_keymap = {}
+"" let g:qfenter_keymap.open = ['<CR>', '<2-LeftMouse>']
+"" let g:qfenter_keymap.vopen = ['<Leader><CR>']
+"" let g:qfenter_keymap.hopen = ['<Leader><Space>']
+"" let g:qfenter_keymap.topen = ['<Leader><Tab>'
+
 "" Map leader to ,
 let mapleader=','
 map <leader>q 		:q <CR>
