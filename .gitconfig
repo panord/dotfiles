@@ -38,3 +38,5 @@
     mrg     = merge --no-ff
     hist    = log --follow -p --
     wchanged = whatchanged
+    clone-req = --recurse-submodules
+    update-all = submodule update --init --recursive
