@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 usage()
 {
@@ -10,4 +10,4 @@ if [ -z "$2" ]; then
 	exit 1
 fi
 
-vimdiff <(xxd $1) <(xxd $2)
+binwalk -W $1 $2
