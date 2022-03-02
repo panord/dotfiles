@@ -19,3 +19,8 @@ traceroute
 cmake
 exuberant-ctags
 gawk
+inotify-tools
+okular
+graphviz
+autotools-dev
+asciio
