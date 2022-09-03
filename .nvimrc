@@ -28,6 +28,7 @@ Plug 'aliou/bats.vim'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'sakhnik/nvim-gdb', { 'do': ':!./install.sh' }
 Plug 'https://github.com/AndrewRadev/linediff.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
