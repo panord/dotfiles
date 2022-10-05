@@ -1,0 +1,27 @@
+# The character '&' in logfile names are substituted with the console
+# name.
+#
+config * {
+	defaultaccess trusted;
+}
+
+default serial {
+	type device;
+	parity none;
+	baud 115200;
+	master localhost;
+	rw *;
+}
+
+##
+## list of clients we allow
+##
+
+console ser1 { device /dev/ttyS1; include serial; }
+console ser2 { device /dev/ttyS2; include serial; }
+console ser3 { device /dev/ttyS3; include serial; }
+console ser4 { device /dev/ttyS4; include serial; }
+console ser5 { device /dev/ttyS5; include serial; }
+console ser6 { device /dev/ttyS6; include serial; }
+console ser7 { device /dev/ttyS7; include serial; }
+console ser8 { device /dev/ttyS8; include serial; }
