@@ -44,3 +44,4 @@
     wchanged = whatchanged
     clone-req = --recurse-submodules
     update-all = submodule update --init --recursive
+    pushf = push --force-with-lease
