@@ -25,3 +25,7 @@ graphviz
 autotools-dev
 asciio
 syslog-ng
+conserver-client
+fzf
+fd-find
+tig
