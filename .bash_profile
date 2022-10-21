@@ -49,5 +49,5 @@ if [ -s $HOME/.bash_work_profile ]; then
 fi
 
 . "$HOME/.cargo/env"
-export PATH=/home/patlu/.nimble/bin:$PATH
+export PATH=$HOME/.nimble/bin:$PATH
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"

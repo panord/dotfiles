@@ -33,7 +33,7 @@ web_install()
 	fi
 
 	if ! yorn "Install ${name}?"; then
-		return 0;
+		return 1;
 	fi
 
 	if ! sh -c "${script} $3"; then
