@@ -47,7 +47,11 @@ web_install()
 echo "Bootstrapping yadm"
 if yorn "Switch wallpaper? (if using feh)"; then
 	mkdir $HOME/.wallpaper
-	wget -O $HOME/.wallpaper/wallpaper.jpg https://512pixels.net/downloads/macos-wallpapers-6k/10-10-6k.jpg
+	if wget -O $HOME/.wallpaper/wallpaper.jpg https://512pixels.net/downloads/macos-wallpapers-6k/10-10-6k.jpg; then
+		echo $HOME/.fehbg >> $HOME/.xprofile
+	else
+		echo "Failed to set wallpaper"
+	fi
 fi
 
 if yorn "Installing packaged software (apt/pacman etc)"; then
