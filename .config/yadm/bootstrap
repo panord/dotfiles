@@ -56,14 +56,14 @@ fi
 
 if yorn "Installing packaged software (apt/pacman etc)"; then
 	# Detect OS version and install corresponding packages
-
-
-	if grep -q "ID_LIKE=debian" /etc/os-release; then
+	if egrep -q "ID_LIKE.*debian" /etc/os-release; then
 		echo "Installing Debian packages..."
+		# Lets install a more modern git...
+		sudo add-apt-repository ppa:git-core/ppa
 		sudo apt update
 		sudo apt upgrade
 		sudo apt install $(cat $HOME/.config/yadm/aptlist)
-	elif grep -q "ID_LIKE=arch" /etc/os-release; then
+	elif egrep -q "ID_LIKE.*arch" /etc/os-release; then
 		sudo pacman -Syu $(cat $HOME/.config/yadm/paclist)
 	else
 		echo "Unsupported OS, skipping"
