@@ -70,9 +70,14 @@ if yorn "Installing packaged software (apt/pacman etc)"; then
 	fi
 
 	if yorn "Enable ssh-agent?"; then
-		sudo systemctl enable --user ssh-agent
-		sudo systemctl start --user ssh-agent
+		systemctl enable --user ssh-agent
+		systemctl start --user ssh-agent
 	fi
+fi
+
+if yorn "Enable sshd?"; then
+	sudo systemctl enable sshd
+	sudo systemctl start sshd
 fi
 
 if yorn "Installing non-packaged software"; then
