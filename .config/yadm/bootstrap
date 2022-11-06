@@ -105,5 +105,9 @@ if yorn "Swap caps with escape?"; then
 	sudo ln -sf $HOME/.config/yadm/swap-caps-esc.sh /etc/profile.d/swap-caps-esc.sh
 fi
 
+if yorn "Change RTC to use local time? (useful for dual boot)"; then
+	sudo timedatectl set-local-rtc 1
+fi
+
 sudo ln -sf /usr/bin/nvim /usr/bin/vi
 echo "Bootstrapping yadm finished"
