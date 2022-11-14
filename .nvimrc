@@ -37,6 +37,7 @@ Plug 'baabelfish/nvim-nim'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'h1mesuke/unite-outline'
 Plug 'neovim/pynvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 "*****************************************************************************
