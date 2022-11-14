@@ -34,7 +34,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias vimdiff='nvim -d'
-
+alias vi='nvim'
 export PS1="$(psusrhost)$(psnetns)$(psdir)\$(psbranch)\[$(tput sgr0)\]$ "
 
 # set vim commands in gnome shell

@@ -33,6 +33,10 @@ Plug 'https://github.com/AndrewRadev/linediff.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'joshdick/onedark.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'baabelfish/nvim-nim'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'h1mesuke/unite-outline'
+Plug 'neovim/pynvim'
 call plug#end()
 
 "*****************************************************************************
@@ -47,9 +51,13 @@ let g:rust_recommended_style 	= 1
 let g:rust_fold 		= 1
 let g:EasyClipAutoFormat	= 1
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+let g:loaded_python_provider = 0
+let g:python3_host_prrog = '/usr/bin/python3'
+set pyxversion=3
 
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:ycm_clangd_binary_path='/usr/bin/clangd'
 
 let Grep_Default_Options = '-IR'
 
@@ -70,9 +78,8 @@ map <leader>n		:set nu! <CR>
 map <leader>r		:set relativenumber! <CR>
 map <leader>b		:Buffers <CR>
 map <leader>f		:exec("Rg ".expand("<cword>"))<CR>
-map <A-u>		:Grep <cword> * <CR>
-map <A-t> 		:tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-map <A-g>		:exec("tag ".expand("<cword>"))<CR>
+map <A-u>		:YcmCompleter GoToReferences<CR>
+map <A-g>		:YcmCompleter GoTo<CR>
 map <S-T>		:tabe <CR>
 map <S-Tab>		:tabprevious <CR>
 map <Tab>		:tabnext <CR>
@@ -98,7 +105,6 @@ nnoremap <leader>g  :Files <CR>
 command! FixWhitespace :%s/\s\+$//e
 command! FWS FixWhitespace
 command! Unix set ff=unix
-command! GoTo :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 command! Hex :%!xxd
 
 syntax on

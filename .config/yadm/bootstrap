@@ -73,6 +73,9 @@ if yorn "Installing packaged software (apt/pacman etc)"; then
 		systemctl enable --user ssh-agent
 		systemctl start --user ssh-agent
 	fi
+
+	# https://shinglyu.com/productivity/2016/05/13/rust-completion_with_ycm.html
+	$HOME/.config/nvim/plugged/YouCompleteMe/install.sh --racer-completer --all
 fi
 
 if yorn "Enable sshd?"; then
@@ -85,7 +88,8 @@ if yorn "Installing non-packaged software"; then
 		cargo install cross
 		rustup target add armv7-unknown-linux-gnueabihf
 	fi
-
+	# Enable python3 neovim plugin
+	pip install neovim
 	web_install nim  "https://nim-lang.org/choosenim/init.sh"
 fi
 
