@@ -86,8 +86,6 @@ map <A-g>              :exec("tag ".expand("<cword>"))<CR>
 "map <A-u>		:YcmCompleter GoToReferences<CR>
 "map <A-g>		:YcmCompleter GoTo<CR>
 map <S-T>		:tabe <CR>
-map <S-Tab>		:tabprevious <CR>
-map <Tab>		:tabnext <CR>
 map <C-H>              :tabprevious <CR>
 map <C-L>              :tabnext <CR>
 map <C-J>              :bnext<CR>
