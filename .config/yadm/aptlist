@@ -30,3 +30,8 @@ fzf
 fd-find
 tig
 tmux
+python-dev
+python3-dev
+go
+npm
+clang
