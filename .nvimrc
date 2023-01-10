@@ -35,6 +35,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'baabelfish/nvim-nim'
 Plug 'ycm-core/YouCompleteMe'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'h1mesuke/unite-outline'
 Plug 'neovim/pynvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -79,8 +80,11 @@ map <leader>n		:set nu! <CR>
 map <leader>r		:set relativenumber! <CR>
 map <leader>b		:Buffers <CR>
 map <leader>f		:exec("Rg ".expand("<cword>"))<CR>
-map <A-u>		:YcmCompleter GoToReferences<CR>
-map <A-g>		:YcmCompleter GoTo<CR>
+map <A-u>              :Grep <cword> * <CR>
+map <A-t>              :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <A-g>              :exec("tag ".expand("<cword>"))<CR>
+"map <A-u>		:YcmCompleter GoToReferences<CR>
+"map <A-g>		:YcmCompleter GoTo<CR>
 map <S-T>		:tabe <CR>
 map <S-Tab>		:tabprevious <CR>
 map <Tab>		:tabnext <CR>
