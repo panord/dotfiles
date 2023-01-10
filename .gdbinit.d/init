@@ -1,0 +1,5 @@
+dashboard registers
+dashboard source -style height 60
+dashboard variables -style compact False
+dashboard variables -style align True
+dashboard registers
