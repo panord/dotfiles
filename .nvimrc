@@ -70,6 +70,23 @@ let Grep_Default_Options = '-IR'
 "" let g:qfenter_keymap.hopen = ['<Leader><Space>']
 "" let g:qfenter_keymap.topen = ['<Leader><Tab>'
 
+"" Defaults nvimgdb
+" Mapping	Command	Description
+" <Leader>dd	:GdbStart gdb -q ./a.out	Start debugging session, allows editing the launching command
+" <Leader>dl	:GdbStartLLDB lldb ./a.out	Start debugging session, allows editing the launching command
+" <Leader>dp	:GdbStartPDB python -m pdb main.py	Start Python debugging session, allows editing the launching command
+" <Leader>db	:GdbStartBashDB bashdb main.sh	Start BASH debugging session, allows editing the launching command
+" <Leader>dr	:GdbStartRR	Start debugging session with rr replay.
+" <F8>	:GdbBreakpointToggle	Toggle breakpoint in the coursor line
+" <F4>	:GdbUntil	Continue execution until a given line (until in gdb)
+" <F5>	:GdbContinue	Continue execution (continue in gdb)
+" <F10>	:GdbNext	Step over the next statement (next in gdb)
+" <F11>	:GdbStep	Step into the next statement (step in gdb)
+" <F12>	:GdbFinish	Step out the current frame (finish in gdb)
+" <c-p>	:GdbFrameUp	Navigate one frame up (up in gdb)
+" <c-n>	:GdbFrameDown	Navigate one frame down (down in gdb)
+
+
 "" Map leader to ,
 let mapleader=','
 map <leader>q 		:q <CR>
@@ -79,7 +96,8 @@ map <leader><space> 	:noh <CR>
 map <leader>n		:set nu! <CR>
 map <leader>r		:set relativenumber! <CR>
 map <leader>b		:Buffers <CR>
-map <leader>f		:exec("Rg ".expand("<cword>"))<CR>
+map <leader>f		:Rg <CR>
+map <leader>h		:History: <CR>
 map <A-u>              :Grep <cword> * <CR>
 map <A-t>              :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-g>              :exec("tag ".expand("<cword>"))<CR>
