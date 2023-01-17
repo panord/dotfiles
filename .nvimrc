@@ -18,6 +18,7 @@ endif
 
 call plug#begin(expand('~/.config/nvim/plugged'),)
 " Plugins "
+Plug 'cdelledonne/vim-cmake'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
