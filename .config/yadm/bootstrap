@@ -66,6 +66,10 @@ if yorn "Installing packaged software (apt/pacman etc)"; then
 		sudo apt install $(cat $HOME/.config/yadm/aptlist)
 	elif egrep -q "ID_LIKE.*arch" /etc/os-release; then
 		sudo pacman -Syu $(cat $HOME/.config/yadm/paclist)
+	elif egrep -q "ID.*fedora" /etc/os-release; then
+		sudo dnf group install "C Development Tools and Libraries" "Development Tools"
+		sudo dnf install pip
+		sudo dnf install python3
 	else
 		echo "Unsupported OS, skipping"
 	fi
