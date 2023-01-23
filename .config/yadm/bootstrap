@@ -76,7 +76,7 @@ if yorn "Installing packaged software (apt/pacman etc)"; then
 	fi
 
 	# https://shinglyu.com/productivity/2016/05/13/rust-completion_with_ycm.html
-	$HOME/.config/nvim/plugged/YouCompleteMe/install.sh --racer-completer --all
+	$HOME/.config/nvim/plugged/YouCompleteMe/install.py --racer-completer --all
 fi
 
 if yorn "Enable sshd?"; then
