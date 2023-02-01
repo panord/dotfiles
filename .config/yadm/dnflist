@@ -2,3 +2,6 @@ nvim
 pip
 python3
 zig
+conserver
+dnsmasq
+neovim
