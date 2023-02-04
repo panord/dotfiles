@@ -99,6 +99,7 @@ if yorn "Installing non-packaged software"; then
 			cargo install $p
 		done
 		for t in $(cat "$HOME/.config/yadm/rust-toolchain"); do
+			echo "Add toolchain $t"
 			rustup target add $t
 		done
 	fi
