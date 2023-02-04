@@ -110,18 +110,15 @@ fi
 
 if yorn "Configure user '${USER}' for common user groups"; then
 	echo "Setting up user groups, these will require restart to take effect"
-	for g in docker dialout wireshark vboxsf; do
+	for g in docker dialout wireshark vboxsf tty tftp; do
 		echo "Adding ${USER} to ${g}"
 		sudo groupadd "$g" 2>/dev/null
 		sudo usermod -aG "$g" ${USER}
 	done
 fi
 
-sudo ln -sf $HOME/.config/yadm/i3-konsole.sh /etc/profile.d/i3-konsole.sh
-sudo ln -sf $HOME/.config/yadm/conserver.cf /etc/conserver/conserver.cf
-
-if yorn "Swap caps with escape?"; then
-	sudo ln -sf $HOME/.config/yadm/swap-caps-esc.sh /etc/profile.d/swap-caps-esc.sh
+if yorn "Unpack etc/ configuration to local machine?"; then
+	sudo cp -r $HOME/.config/yadm/root /
 fi
 
 if yorn "Change RTC to use local time? (useful for dual boot)"; then
