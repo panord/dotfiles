@@ -62,6 +62,7 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:ycm_clangd_binary_path='/usr/bin/clangd'
 
+le g:cmake_build_options = [ '-j4', ]
 let Grep_Default_Options = '-IR'
 
 "" Defaults qfenter
