@@ -1,11 +1,10 @@
-local lsp = require("lsp-zero")
+local lsp = require('lsp-zero')
 
-lsp.preset("recommended")
+lsp.on_attach(function(client, bufnr)
+  lsp.default_keymaps({buffer = bufnr})
+end)
 
-lsp.ensure_installed({
-  'tsserver',
-  'rust_analyzer',
-})
+lsp.setup_servers({'lua_ls', 'rust_analyzer', 'clangd', 'bashls', 'cmake'})
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
@@ -22,10 +21,6 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
-
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
-})
 
 lsp.set_preferences({
     suggest_lsp_servers = false,

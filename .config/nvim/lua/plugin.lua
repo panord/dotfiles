@@ -15,6 +15,9 @@ return require('packer').startup(function(use)
     use("tpope/vim-fugitive")
     use {'tpope/vim-commentary'}
     use("theprimeagen/refactoring.nvim")
+    use("williamboman/mason.nvim")
+    use("williamboman/mason-lspconfig.nvim")
+    use {"neovim/nvim-lspconfig"}
     use {
 	  'VonHeikemen/lsp-zero.nvim',
 	  branch = 'v1.x',
