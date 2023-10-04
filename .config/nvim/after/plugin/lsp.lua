@@ -4,7 +4,7 @@ lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({buffer = bufnr})
 end)
 
-lsp.setup_servers({'lua_ls', 'rust_analyzer', 'clangd', 'bashls', 'cmake'})
+lsp.setup_servers({'lua_ls', 'rust_analyzer', 'clangd', 'bashls', 'cmake', 'csharp_ls'})
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
