@@ -8,4 +8,4 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 -- load_extension, somewhere after setup function:
 require('telescope').setup {}
 
-require('telescope').load_extension('fzf')
+-- require('telescope').load_extension('fzf')

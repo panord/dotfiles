@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
         requires = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' },
+            { 'p00f/clangd_extensions.nvim'},
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },
@@ -40,5 +41,6 @@ return require('packer').startup(function(use)
         }
     }
 
+    use {'cdelledonne/vim-cmake'}
     use {'cdelledonne/vim-cmake'}
 end)
