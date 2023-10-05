@@ -38,7 +38,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>nx", "<cmd>!chmod -x %<CR>", { silent = true })
 
 -- load file
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end)
-
+vim.keymap.set("n", "<leader><leader>", ":so %<CR>")
+-- Open nvim config
+vim.keymap.set("n", "<leader>c", ":Explore $HOME/.config/nvim/<CR>")
