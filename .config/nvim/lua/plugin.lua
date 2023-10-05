@@ -39,7 +39,6 @@ return require('packer').startup(function(use)
             { 'rafamadriz/friendly-snippets' },
         }
     }
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    -- Figure out how to install ripgrep for neovim
-    -- use { 'BurntSushi/ripgrep', run = 'cargo install --path .' }
+
+    use {'cdelledonne/vim-cmake'}
 end)
