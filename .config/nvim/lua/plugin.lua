@@ -43,4 +43,5 @@ return require('packer').startup(function(use)
 
     use {'cdelledonne/vim-cmake'}
     use {'cdelledonne/vim-cmake'}
+    use {'feline-nvim/feline.nvim'}
 end)
