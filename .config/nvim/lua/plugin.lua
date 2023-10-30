@@ -42,6 +42,6 @@ return require('packer').startup(function(use)
     }
 
     use {'cdelledonne/vim-cmake'}
-    use {'cdelledonne/vim-cmake'}
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use {'feline-nvim/feline.nvim'}
 end)
