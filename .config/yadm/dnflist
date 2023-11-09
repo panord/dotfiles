@@ -1,8 +1,10 @@
-nvim
-pip
+python3-pip
 python3
 zig
 conserver
 dnsmasq
 neovim
 perl
+podman
+cmake
+npm

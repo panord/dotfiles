@@ -45,14 +45,6 @@ web_install()
 }
 
 echo "Bootstrapping yadm"
-if yorn "Switch wallpaper? (if using feh)"; then
-	mkdir $HOME/.wallpaper
-	if wget -O $HOME/.wallpaper/wallpaper.jpg https://512pixels.net/downloads/macos-wallpapers-6k/10-10-6k.jpg; then
-		echo $HOME/.fehbg >> $HOME/.xprofile
-	else
-		echo "Failed to set wallpaper"
-	fi
-fi
 
 if yorn "Installing packaged software (apt/pacman etc)"; then
 	# Detect OS version and install corresponding packages
@@ -64,8 +56,6 @@ if yorn "Installing packaged software (apt/pacman etc)"; then
 		sudo apt update
 		sudo apt upgrade
 		sudo apt install $(cat $HOME/.config/yadm/aptlist)
-	elif egrep -q "ID_LIKE.*arch" /etc/os-release; then
-		sudo pacman -Syu $(cat $HOME/.config/yadm/paclist)
 	elif egrep -q "ID.*fedora" /etc/os-release; then
 		sudo dnf -y group install "C Development Tools and Libraries" "Development Tools"
 		sudo dnf -y install $(cat $HOME/.config/yadm/dnflist)
@@ -73,12 +63,7 @@ if yorn "Installing packaged software (apt/pacman etc)"; then
 		echo "Unsupported OS, skipping"
 	fi
 
-	if yorn "Enable ssh-agent?"; then
-		systemctl enable --user ssh-agent
-		systemctl start --user ssh-agent
-	fi
-
-	# https://shinglyu.com/productivity/2016/05/13/rust-completion_with_ycm.html
+    # https://shinglyu.com/productivity/2016/05/13/rust-completion_with_ycm.html
 	$HOME/.config/nvim/plugged/YouCompleteMe/install.py --racer-completer --all
 fi
 
@@ -89,7 +74,6 @@ fi
 
 if yorn "Enable gdb dashboard?"; then
 	wget -P ~ https://git.io/.gdbinit -O $HOME/.gdbinit
-	python -m ensurepip --upgrade
 	pip install pygments
 fi
 
@@ -125,5 +109,4 @@ if yorn "Change RTC to use local time? (useful for dual boot)"; then
 	sudo timedatectl set-local-rtc 1
 fi
 
-sudo ln -sf /usr/bin/nvim /usr/bin/vi
 echo "Bootstrapping yadm finished"
