@@ -1,4 +1,4 @@
-return require('packer').startup(function(use)
+return require('packer').startup(function()
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
     use 'joshdick/onedark.vim'
@@ -10,22 +10,20 @@ return require('packer').startup(function(use)
         end,
     }
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use("tpope/vim-fugitive")
     use { 'tpope/vim-commentary' }
     use("theprimeagen/refactoring.nvim")
-    use("williamboman/mason.nvim")
-    use("williamboman/mason-lspconfig.nvim")
-    use { "neovim/nvim-lspconfig" }
+
+
     use {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
         requires = {
-            -- LSP Support
             { 'neovim/nvim-lspconfig' },
-            { 'p00f/clangd_extensions.nvim'},
+            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },
@@ -38,10 +36,13 @@ return require('packer').startup(function(use)
             -- Snippets
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
-        }
-    }
 
-    use {'cdelledonne/vim-cmake'}
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    use {'feline-nvim/feline.nvim'}
+            { 'p00f/clangd_extensions.nvim' },
+
+        },
+
+    }
+    use { 'cdelledonne/vim-cmake' }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use { 'feline-nvim/feline.nvim' }
 end)
