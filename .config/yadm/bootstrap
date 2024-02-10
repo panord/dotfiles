@@ -45,7 +45,6 @@ web_install()
 }
 
 echo "Bootstrapping yadm"
-
 if yorn "Installing packaged software (apt/pacman etc)"; then
 	# Detect OS version and install corresponding packages
 	if egrep -q "ID_LIKE.*debian" /etc/os-release; then
@@ -57,39 +56,18 @@ if yorn "Installing packaged software (apt/pacman etc)"; then
 		sudo apt upgrade
 		sudo apt install $(cat $HOME/.config/yadm/aptlist)
 	elif egrep -q "ID.*fedora" /etc/os-release; then
+        sudo dnf update --refresh
+        sudo dnf -y install gnome-vrr
 		sudo dnf -y group install "C Development Tools and Libraries" "Development Tools"
 		sudo dnf -y install $(cat $HOME/.config/yadm/dnflist)
 	else
 		echo "Unsupported OS, skipping"
 	fi
-
-    # https://shinglyu.com/productivity/2016/05/13/rust-completion_with_ycm.html
-	$HOME/.config/nvim/plugged/YouCompleteMe/install.py --racer-completer --all
-fi
-
-if yorn "Enable sshd?"; then
-	sudo systemctl enable sshd
-	sudo systemctl start sshd
 fi
 
 if yorn "Enable gdb dashboard?"; then
 	wget -P ~ https://git.io/.gdbinit -O $HOME/.gdbinit
 	pip install pygments
-fi
-
-if yorn "Installing non-packaged software"; then
-	if web_install rust "https://sh.rustup.rs" -y; then
-		for p in $(cat "$HOME/.config/yadm/cargo"); do
-			cargo install $p
-		done
-		for t in $(cat "$HOME/.config/yadm/rust-toolchain"); do
-			echo "Add toolchain $t"
-			rustup target add $t
-		done
-	fi
-	# Enable python3 neovim plugin
-	pip install neovim
-	web_install nim  "https://nim-lang.org/choosenim/init.sh"
 fi
 
 if yorn "Configure user '${USER}' for common user groups"; then
@@ -103,10 +81,6 @@ fi
 
 if yorn "Unpack etc/ configuration to local machine?"; then
 	sudo cp -r $HOME/.config/yadm/root /
-fi
-
-if yorn "Change RTC to use local time? (useful for dual boot)"; then
-	sudo timedatectl set-local-rtc 1
 fi
 
 echo "Bootstrapping yadm finished"
