@@ -1,0 +1,7 @@
+input * {
+    xkb_layout "se"
+    xkb_options "caps:escape"
+    # See man -P cat xkeyboard-config
+    # for available options
+    caps:escape_shifted_capslock
+}
