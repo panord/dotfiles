@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+pkill swaybg
+swaybg -o 'DP-2' -i "/usr/share/backgrounds/fedora-workstation/montclair_dark.webp" -m fill &
+swaybg -o 'DP-1' -i "/usr/share/backgrounds/fedora-workstation/montclair_dark.webp" -m fill &
