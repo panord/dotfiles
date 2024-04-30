@@ -1,6 +1,7 @@
 [user]
-    name        = Patrik Nordvall
-    email       = patrik.nordvall95@gmail.com
+    name = Patrik Nordvall
+    email = patrik.nordvall95@gmail.com
+
 [core]
     editor = nvim
 
@@ -45,6 +46,7 @@
     mrg     = merge --no-ff
     hist    = log --follow -p --
     wchanged = whatchanged
-    clone-req = --recurse-submodules
-    update-all = submodule update --init --recursive
+    repo-clone = clone --recurse-submodules
+    repo-update = submodule update --init --recursive
+    repo-reset = reset --recursive
     pushf = push --force-with-lease
