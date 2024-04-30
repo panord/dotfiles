@@ -56,9 +56,10 @@ if yorn "Installing packaged software (apt/pacman etc)"; then
 		sudo apt upgrade
 		sudo apt install $(cat $HOME/.config/yadm/aptlist)
 	elif egrep -q "ID.*fedora" /etc/os-release; then
+		sudo dnf -y group install "C Development Tools and Libraries" "Development Tools" "Sway Desktop"
         sudo dnf update --refresh
-        sudo dnf -y install gnome-vrr
-		sudo dnf -y group install "C Development Tools and Libraries" "Development Tools"
+        sudo dnf copr enable -y eddsalkield/swaylock-effects
+        sudo dnf install --allow-erasing swaylock-effects
 		sudo dnf -y install $(cat $HOME/.config/yadm/dnflist)
 	else
 		echo "Unsupported OS, skipping"
@@ -68,6 +69,11 @@ fi
 if yorn "Enable gdb dashboard?"; then
 	wget -P ~ https://git.io/.gdbinit -O $HOME/.gdbinit
 	pip install pygments
+fi
+
+if yorn "Enable powerlevel10k terminal?"; then
+    web_install "oh-my-zsh" https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 fi
 
 if yorn "Configure user '${USER}' for common user groups"; then

@@ -9,3 +9,5 @@ podman
 cmake
 npm
 tig
+rofi
+zsh
