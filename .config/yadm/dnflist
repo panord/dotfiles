@@ -11,3 +11,6 @@ npm
 tig
 rofi
 zsh
+pip
+rust
+cargo

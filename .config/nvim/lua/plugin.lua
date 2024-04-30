@@ -157,6 +157,8 @@ require('lazy').setup({
             require("lspconfig").clangd.setup {}
             require("lspconfig").lua_ls.setup {}
             require("lspconfig").cmake.setup {}
+            require("lspconfig").dockerls.setup {}
+
         end
 
     },

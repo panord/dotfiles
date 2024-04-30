@@ -55,7 +55,7 @@ if yorn "Installing packaged software (apt/pacman etc)"; then
 		sudo apt update
 		sudo apt upgrade
 		sudo apt install $(cat $HOME/.config/yadm/aptlist)
-	elif egrep -q "ID.*fedora" /etc/os-release; then
+	elif grep -Eq "ID.*fedora" /etc/os-release; then
 		sudo dnf -y group install "C Development Tools and Libraries" "Development Tools" "Sway Desktop"
         sudo dnf update --refresh
         sudo dnf copr enable -y eddsalkield/swaylock-effects
@@ -78,7 +78,7 @@ fi
 
 if yorn "Configure user '${USER}' for common user groups"; then
 	echo "Setting up user groups, these will require restart to take effect"
-	for g in docker dialout wireshark vboxsf tty tftp; do
+	for g in dialout wireshark vboxsf tty tftp; do
 		echo "Adding ${USER} to ${g}"
 		sudo groupadd "$g" 2>/dev/null
 		sudo usermod -aG "$g" ${USER}
