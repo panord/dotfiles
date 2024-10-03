@@ -45,6 +45,11 @@ web_install()
 }
 
 echo "Bootstrapping yadm"
+
+if yorn "Install LazyVim"; then
+    git clone https://github.com/LazyVim/starter $HOME/.config/nvim
+fi
+
 if yorn "Installing packaged software (apt/pacman etc)"; then
 	# Detect OS version and install corresponding packages
 	if egrep -q "ID_LIKE.*debian" /etc/os-release; then
