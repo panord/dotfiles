@@ -1,2 +1,2 @@
 #!/bin/bash
-. "$HOME/.cargo/env"
+. "$HOME/.cargo/env" >/dev/null 2>&1

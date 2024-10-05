@@ -1,0 +1,3 @@
+
+# My script path
+export PATH="$HOME/bin:$PATH"

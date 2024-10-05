@@ -1,0 +1,44 @@
+#!/bin/bash
+
+source /usr/share/git-core/contrib/completion/git-prompt.sh
+
+psdir() {
+  echo "\[\033[34m\]\W\[\033[0m\]"
+}
+
+psusrhost() {
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -n "$SSH_CONNECTION" ]; then
+    echo -e "\[\033[31m\]\u@\h:\[\033[0m\]"
+  else
+    echo -e "\[\033[32m\]\u@\h:\[\033[0m\]"
+  fi
+}
+
+psnetns() {
+  netns=$(ip netns identify $$)
+  if [ -n "$netns" ]; then
+    echo -e "\[\033[31m\](${netns})\[\033[0m\]"
+  fi
+}
+
+if [ -f "/usr/share/git/completion/git-prompt.sh" ]; then
+  source "/usr/share/git/completion/git-prompt.sh"
+fi
+
+psbranch() {
+  echo -e "$(__git_ps1 "[%s]")"
+}
+
+# Work profile
+if [ -s $HOME/.bash_work_profile ]; then
+  source $HOME/.bash_work_profile
+fi
+
+# Function to set the Yocto prompt
+oe_prompt() {
+  if which bitbake >/dev/null 2>%1; then
+    echo "[oe]"
+  fi
+}
+
+export PS1="$(psusrhost)$(psnetns)$(psdir)\$(psbranch)\$(oe_prompt)\[$(tput sgr0)\]$ "
