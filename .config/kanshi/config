@@ -1,4 +1,5 @@
 profile home {
-  output DP-1 enable mode 2560x1440@165.080 position 1706,0 scale 1.5
-  output DP-2 enable mode 2560x1440@74.924  position 0,0 scale 1.5
+  output DP-1 enable mode 2560x1440@165.080 position 2560,0 scale 1.0
+  output DP-2 enable mode 2560x1440@74.924  position 0,0 scale 1.0
 }
+
