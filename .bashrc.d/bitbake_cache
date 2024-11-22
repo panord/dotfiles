@@ -1,3 +1,0 @@
-export BB_ENV_PASSTHROUGH_ADDITIONS="DL_DIR SSTATE_DIR"
-export DL_DIR="${HOME}/data/bitbake.downloads"
-export SSTATE_DIR="${HOME}/data/bitbake.sstate"

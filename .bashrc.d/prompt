@@ -2,11 +2,24 @@
 
 source /usr/share/git-core/contrib/completion/git-prompt.sh
 
-psdir() {
+# Original prompt
+ORIGINAL_PS1="$PS1"
+oeprompt=""
+
+# Function to check the environment
+ps_oe_env() {
+    if [[ -n "$BBPATH" ]]; then
+      echo "[oe]"
+    else
+      echo ""
+    fi
+}
+
+ps_dir() {
   echo "\[\033[34m\]\W\[\033[0m\]"
 }
 
-psusrhost() {
+ps_usrhost() {
   if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -n "$SSH_CONNECTION" ]; then
     echo -e "\[\033[31m\]\u@\h:\[\033[0m\]"
   else
@@ -14,7 +27,7 @@ psusrhost() {
   fi
 }
 
-psnetns() {
+ps_netns() {
   netns=$(ip netns identify $$)
   if [ -n "$netns" ]; then
     echo -e "\[\033[31m\](${netns})\[\033[0m\]"
@@ -25,20 +38,19 @@ if [ -f "/usr/share/git/completion/git-prompt.sh" ]; then
   source "/usr/share/git/completion/git-prompt.sh"
 fi
 
-psbranch() {
+ps_git_branch() {
   echo -e "$(__git_ps1 "[%s]")"
 }
+
+set_prompt() {
+  PS1="$(ps_usrhost)$(ps_netns)$(ps_dir)$(ps_git_branch)$(ps_oe_env)\[$(tput sgr0)\]$ "
+}
+
+# Set PROMPT_COMMAND to check environment before each prompt
+PROMPT_COMMAND=set_prompt
 
 # Work profile
 if [ -s $HOME/.bash_work_profile ]; then
   source $HOME/.bash_work_profile
 fi
 
-# Function to set the Yocto prompt
-oe_prompt() {
-  if which bitbake >/dev/null 2>%1; then
-    echo "[oe]"
-  fi
-}
-
-export PS1="$(psusrhost)$(psnetns)$(psdir)\$(psbranch)\$(oe_prompt)\[$(tput sgr0)\]$ "
