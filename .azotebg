@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 pkill swaybg
-swaybg -o 'DP-2' -i "$XDG_DATA_HOME/azote/sample/azote-wallpaper1.jpg" -m fill &
-swaybg -o 'DP-1' -i "$XDG_DATA_HOME/azote/sample/azote-wallpaper1.jpg" -m fill &
+swaybg -o 'DP-2' -i "/home/panord/.local/share/azote/sample/azote-wallpaper1.jpg" -m fill &
+swaybg -o 'DP-1' -i "/home/panord/.local/share/azote/sample/azote-wallpaper1.jpg" -m fill &

@@ -208,10 +208,7 @@ exec_always {
   pkill kanshi
   kanshi &
 }
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-exec waybar
+exec ~/.azotebg
 
 include config.d/*
+include /usr/share/sway/config.d/*
