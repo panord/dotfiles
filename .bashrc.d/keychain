@@ -1,2 +1,4 @@
 #!/bin/bash
-eval `keychain --eval --quiet`
+if which keychain > /dev/null 2>&1; then
+  eval `keychain --eval --quiet`
+fi
