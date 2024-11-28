@@ -7,7 +7,6 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -20,13 +19,7 @@ set $term foot
 # on the original workspace that the command was run on.
 set $menu "rofi -combi-modi window,drun,ssh,run -show combi -show-icons"
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec swayidle \
-    timeout 300 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-	resume 'swaymsg output \* dpms on' \
-	before-sleep 'loginctl lock-session $XDG_SESSION_ID' \
-	lock swaylock -S --effect-blur 7x5  --ring-color bb00bb --indicator --clock
 
-bindsym Mod4+l exec swaylock -S --effect-blur 7x5  --ring-color bb00bb --indicator --clock
 
 ### Output configuration
 #
@@ -203,12 +196,6 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-
-exec_always {
-  pkill kanshi
-  kanshi &
-}
-exec ~/.azotebg
 
 include config.d/*
 include /usr/share/sway/config.d/*
