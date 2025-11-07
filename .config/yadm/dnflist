@@ -3,14 +3,11 @@ python3
 zig
 conserver
 dnsmasq
-neovim
-perl
 podman
 cmake
 npm
 tig
-rofi
-zsh
-pip
 rust
 cargo
+ripgrep
+fd-find

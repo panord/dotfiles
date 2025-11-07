@@ -12,53 +12,23 @@ yorn()
 	done
 }
 
-download()
-{
-	curl --proto '=https' --tlsv1.2 -sSf $1
-}
-
-web_install()
-{
-	name=$1
-	url=$2
-	args=$3
-
-	script=$(download "$url")
-	cand=$(echo "$script" | sha256sum)
-	target=$(cat $(dirname $0)/${name}.sha256)
-	if [ "${cand}" != "${target}" ]; then
-		echo "INVALID SHA256, SKIPPING ${name}"
-		echo -e "\tGot '${cand}'"
-		echo -e "\tExpected '${target}'"
-	fi
-
-	if ! yorn "Install ${name}?"; then
-		return 1;
-	fi
-
-	if ! sh -c "${script} $3"; then
-		echo "Failed installing ${name}"
-		return 1;
-	fi
-
-	return 0;
-}
-
-echo "Bootstrapping yadm"
-
-if yorn "Install LazyVim"; then
-    git clone https://github.com/LazyVim/starter $HOME/.config/nvim
-    curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage -o  $HOME/bin/nvim
-    chmod u+x $HOME/bin/nvim
+if grep -Eq "ID.*fedora" /etc/os-release; then
+	echo "Unsupported OS, skipping"
 fi
 
-if yorn "Installing packaged software (apt/pacman etc)"; then
-	if grep -Eq "ID.*fedora" /etc/os-release; then
-		sudo dnf -y group install "C Development Tools and Libraries" "Development Tools"
-	  sudo dnf -y install $(cat $HOME/.config/yadm/dnflist)
-	else
-		echo "Unsupported OS, skipping"
-	fi
+echo "Bootstrapping..."
+
+if yorn "Install LazyVim"; then
+	git clone https://github.com/LazyVim/starter $HOME/.config/nvim
+	sudo curl -LO curl -LO https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.appimage -o /usr/local/bin/nvim
+	sudo chmod u+x /usr/local/bin/nvim
+	sudo rm /usr/bin/vi
+	sudo update-alternatives --install /usr/bin/vi vi /usr/local/bin/nvim 1
+fi
+
+if yorn "Installing packaged software"; then
+	sudo dnf -y group install "C Development Tools and Libraries" "Development Tools"
+	sudo dnf -y install $(cat $HOME/.config/yadm/dnflist)
 fi
 
 if yorn "Enable gdb dashboard?"; then
@@ -66,17 +36,4 @@ if yorn "Enable gdb dashboard?"; then
 	pip install pygments
 fi
 
-if yorn "Configure user '${USER}' for common user groups"; then
-	echo "Setting up user groups, these will require restart to take effect"
-	for g in dialout wireshark vboxsf tty tftp; do
-		echo "Adding ${USER} to ${g}"
-		sudo groupadd "$g" 2>/dev/null
-		sudo usermod -aG "$g" ${USER}
-	done
-fi
-
-if yorn "Unpack etc/ configuration to local machine?"; then
-	sudo cp -r $HOME/.config/yadm/root /
-fi
-
-echo "Bootstrapping yadm finished"
+echo "install finished"
